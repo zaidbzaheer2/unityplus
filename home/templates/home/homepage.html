@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}Home{% endblock %}
+{% block css_links %}
+<link rel="stylesheet" href="{% static 'styles/homepage.css' %}" class="css">
+{% endblock %}
+
+{% block body %}
+<style>
+
+    .content-holder{
+        display: flex;
+        margin: 0 auto;
+        margin-top: 60px;
+        width: 30%;
+        height: 500px;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: flex-start;
+        align-content: space-around;
+    }
+    .cards{
+        position: relative;
+        height: 200px;
+        width: 200px;
+        border: 1px solid black;
+        border-radius: 20px;
+        background-color: white;
+        text-align: center;
+    }
+    .cards h4{
+        margin-top: 10px;
+    }
+    .thumb-holder{
+        width: 160px;
+        height: 160px;
+        margin: 0 auto;
+        border-radius: 20px;
+        text-align: center;
+    }
+    .thumb-holder img{
+     position: absolute;
+     top: 30%;
+     left: 35%;
+    }
+    .cards:hover .thumbnail{
+        filter: brightness(100);
+    }
+    .cards:hover{
+        background-color: black;
+        color: white;
+    }
+    .fixed{
+        background-color: white !important;
+        color: black;
+    }
+    
+    .-fixed:hover{
+        cursor:pointer;
+        background-color: white !important;
+        color: black;
+    }
+    </style>
+    
+    <div class="content-holder">
+        <div class="cards">
+            <div class="thumb-holder">
+            <img class="thumbnail" src="{% static 'media/unitylogo.png' %}" width="50px" height="50px">
+            </div>
+
+            <hr>
+            <h4>Projects</h4>
+        </div>
+        <div class="cards">
+            <div class="thumb-holder">
+                <img class="thumbnail" src="{% static 'media/search.png' %}" width="50px" height="50px">
+            </div>
+
+            <hr>
+            <h4>Search Projects</h4>
+        </div>
+        <div class="cards -fixed">
+            <div class="thumb-holder">
+                <img class="thumbnail" src="{% static 'media/uploadC.png' %}" width="50px" height="50px">
+            </div>
+
+            <hr>
+            <h4>Upload Project</h4>
+        </div>
+        <div class="cards -fixed"><a href="{% url 'ViewPage' %}">
+            <div class="thumb-holder">
+                <img class="thumbnail" src="{% static 'media/viewerA.png' %}" width="50px" height="50px">
+            </div>
+
+            <hr>
+            <h4>Viewer</h4>
+            </a>
+        </div>
+    </div>
+
+{% endblock %}

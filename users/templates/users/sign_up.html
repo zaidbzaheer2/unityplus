@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css_links %}
+<link rel="stylesheet" href="{% static 'styles/sign_up.css'%}" class="css">
+{% endblock %}
+{% block page_title %}Sign Up{% endblock %}
+{% block body %}
+<style>
+.content-holder{
+    width: 50%;
+    height: 500px;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+.sign_up-form{
+    display: flex;
+    background-color: rgb(188, 188, 214);
+    width: 60%;
+    margin: 0 auto;
+    height: 90%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    align-content: stretch;
+    flex-wrap: wrap;
+}
+.sign_up-form div{
+    width: 65%;
+    background-color: white;
+    border-radius: 20px;
+}
+.sign_up-form div label{
+    float: left;
+    font-size: 16px;
+    margin-top: 3px;
+    margin-left: 5px;
+}
+.sign_up-form div input{
+    float: right;
+    height: 30px;
+    width: 200px;
+    border: none;
+    border-left: 1px solid black ;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    outline: none;
+    
+}
+</style>
+<div class="content-holder">
+    <form method="post" class="sign_up-form">
+        {% csrf_token %}
+        <div>
+        <label for="username">Email</label>
+        {{form.username}}
+    </div><div>
+        <label for="password1">Create Password</label>
+        {{form.password1}}
+    </div><div>
+        <label for="password2">Confirm Password</label>
+        {{form.password2}}
+    </div>
+        <button style="margin:0 20%;" type="submit">Save</button>
+    </form>
+   
+</div>
+{% endblock %}a

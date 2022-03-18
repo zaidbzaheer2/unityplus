@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css_links %}
+{% endblock %}
+{% block page_title %}Sign Up{% endblock %}
+{% block body %}
+<style>
+.content-holder{
+    width: 50%;
+    height: 500px;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+</style>
+<div class="content-holder">
+<form method="post" class="loginForm">
+    {% csrf_token %}
+    <input type="text" value="username" name="username" required>
+    <input type="password" value="password" name="password" required>
+    <button type="submit">Login</button>
+    </form>
+</div>
+{% endblock %}
