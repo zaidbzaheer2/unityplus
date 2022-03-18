@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load static  %}
+{% load static %}
 <html lang="en-us">
   <head>
     <meta charset="utf-8">
@@ -57,11 +57,11 @@
       }
 
       var buildUrl = "{% static 'custom/Build' %}";
-      var loaderUrl = buildUrl + "/CHA2.loader.js";
+      var loaderUrl = buildUrl + "/build_three.loader.js";
       var config = {
-        dataUrl: buildUrl + "/CHA2.data.gz",
-        frameworkUrl: buildUrl + "/CHA2.framework.js.gz",
-        codeUrl: buildUrl + "/CHA2.wasm.gz",
+        dataUrl: buildUrl + "/build_three.data.gz",
+        frameworkUrl: buildUrl + "/build_three.framework.js.gz",
+        codeUrl: buildUrl + "/build_three.wasm.gz",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "Teetho",
