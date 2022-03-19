@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static 'custom/TemplateData/style.css' %}">
   </head>
   <body>
+   
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600></canvas>
       <div id="unity-loading-bar">
@@ -57,11 +58,11 @@
       }
 
       var buildUrl = "{% static 'custom/Build' %}";
-      var loaderUrl = buildUrl + "/build_three.loader.js";
+      var loaderUrl = buildUrl + "/build_six.loader.js";
       var config = {
-        dataUrl: buildUrl + "/build_three.data.gz",
-        frameworkUrl: buildUrl + "/build_three.framework.js.gz",
-        codeUrl: buildUrl + "/build_three.wasm.gz",
+        dataUrl: buildUrl + "/build_six.data.gz",
+        frameworkUrl: buildUrl + "/build_six.framework.js.gz",
+        codeUrl: buildUrl + "/build_six.wasm.gz",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "Teetho",
