@@ -5,11 +5,10 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity WebGL Player | Teetho</title>
-    <link rel="shortcut icon" href="{% static 'custom/TemplateData/favicon.ico' %}">
+
     <link rel="stylesheet" href="{% static 'custom/TemplateData/style.css' %}">
   </head>
   <body>
-   
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600></canvas>
       <div id="unity-loading-bar">
@@ -58,11 +57,11 @@
       }
 
       var buildUrl = "{% static 'custom/Build' %}";
-      var loaderUrl = buildUrl + "/build_six.loader.js";
+      var loaderUrl = buildUrl + "/build_eight.loader.js";
       var config = {
-        dataUrl: buildUrl + "/build_six.data.gz",
-        frameworkUrl: buildUrl + "/build_six.framework.js.gz",
-        codeUrl: buildUrl + "/build_six.wasm.gz",
+        dataUrl: buildUrl + "/build_eight.data.unityweb",
+        frameworkUrl: buildUrl + "/build_eight.framework.js.unityweb",
+        codeUrl: buildUrl + "/build_eight.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "Teetho",

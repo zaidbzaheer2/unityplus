@@ -3,9 +3,14 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from . models import GLBModels
 from . serializers import glbSerializer
-# Create your views here.
+from django.views.decorators.gzip import gzip_page
+
+
+
+@gzip_page
 def viewpage(request):
     return render(request, 'viewer/index.html')
+
 
 class ViewData(APIView):
     try:
