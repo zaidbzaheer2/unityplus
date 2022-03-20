@@ -1,1 +1,1 @@
-web: python manage.py collectstatic --no-input; gunicorn UnityPlus.wsgi --log-file - --log-level debug
+web: python manage.py collectstatic --no-input; gunicorn UnityPlus.wsgi --timeout 60  --log-file - --log-level debug
