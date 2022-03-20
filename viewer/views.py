@@ -3,11 +3,12 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from . models import GLBModels
 from . serializers import glbSerializer
-from django.views.decorators.gzip import gzip_page
 
 
 
-@gzip_page
+
+def testpage(request):
+    return render(request, 'viewer/test_page.html')
 def viewpage(request):
     return render(request, 'viewer/index.html')
 

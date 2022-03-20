@@ -3,7 +3,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('',views.viewpage, name='ViewPage'),
-    path('api/viewer/data/<str:pk>/',views.ViewData.as_view(), name='view-data')
+    path('api/viewer/data/<str:pk>/',views.ViewData.as_view(), name='view-data'),
+    path('test/', views.testpage, name="testPage")
 
         
 ]
