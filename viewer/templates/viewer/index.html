@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | Teetho</title>
+    <title>Zaid</title>
     <link rel="shortcut icon" href="{% static 'media/favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'styles/style.css' %}">
   </head>
@@ -50,9 +50,9 @@
       </div>
       <div id="unity-warning"> </div>
       <div id="unity-footer">
-        <div id="unity-webgl-logo"></div>
+        <div style="display:none" id="unity-webgl-logo"></div>
         <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">Teetho</div>
+        <div id="unity-build-title">Zaid v1.0</div>
       </div>
     </div>
     <script>
@@ -87,12 +87,12 @@
         updateBannerVisibility();
       }
 
-      var buildUrl = "Build";
-      var loaderUrl = "{% static 'JS/build_thirteen.loader.js' %}";
+    var buildUrl = "Build";
+      var loaderUrl = "{% static 'JS/build_28.loader.js' %}";
       var config = {
-        dataUrl: "{% static 'JS/build_thirteen.data.unityweb' %}",
-        frameworkUrl: "{% static 'JS/build_thirteen.framework.js.unityweb' %}",
-        codeUrl: "{% static 'JS/build_thirteen.wasm.unityweb' %}",
+        dataUrl: "{% static 'JS/build_28.data.unityweb' %}",
+        frameworkUrl: "{% static 'JS/build_28.framework.js.unityweb' %}",
+        codeUrl: "{% static 'JS/build_28.wasm.unityweb' %}",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "Teetho",
