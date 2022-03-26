@@ -5,6 +5,7 @@ import uuid
 from django.contrib.auth.models import User
 # Create your models here.
 class GLBModels(models.Model):
+    case_alias = models.CharField(null=True, blank=True, max_length=50);
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=True)
     upper_model = models.FileField(null=True, blank=True)

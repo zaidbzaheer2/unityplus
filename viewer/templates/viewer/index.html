@@ -43,7 +43,7 @@
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600></canvas>
       <div id="unity-loading-bar">
-        <div id="unity-logo"></div>
+        <div style="display: none;" id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
           <div id="unity-progress-bar-full"></div>
         </div>
@@ -88,11 +88,11 @@
       }
 
     var buildUrl = "Build";
-      var loaderUrl = "{% static 'JS/build_28.loader.js' %}";
+      var loaderUrl = "{% static 'JS/build_38.loader.js' %}";
       var config = {
-        dataUrl: "{% static 'JS/build_28.data.unityweb' %}",
-        frameworkUrl: "{% static 'JS/build_28.framework.js.unityweb' %}",
-        codeUrl: "{% static 'JS/build_28.wasm.unityweb' %}",
+        dataUrl: "{% static 'JS/build_38.data.unityweb' %}",
+        frameworkUrl: "{% static 'JS/build_38.framework.js.unityweb' %}",
+        codeUrl: "{% static 'JS/build_38.wasm.unityweb' %}",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "Teetho",

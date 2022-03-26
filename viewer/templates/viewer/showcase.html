@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}Home{% endblock %}
+{% block css_links %}
+
+{% endblock %}
+
+{% block body %}
+<style>
+    .content-holder{
+        width: 70%;
+        height: 100vh;
+        margin: 0 auto;
+        margin-top: 60px;
+    }
+    .item-container{
+        width: 70%;
+        margin: 10px auto;
+        padding: 8px;
+        height: 60px;
+        border-radius: 10px;
+    }
+</style>
+<div class="content-holder">
+    {% for i in models %}
+        <a href="{% url 'ViewPage' i.id %}">
+            <div class="item-container">
+                <h2>{{i.case_alias}}</h2>
+            </div>
+        </a>
+    {% endfor %}
+    </div>
+{% endblock %}
