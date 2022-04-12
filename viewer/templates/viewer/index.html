@@ -4,12 +4,27 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Zaid</title>
+    <title>Case Viewer</title>
     <link rel="shortcut icon" href="{% static 'media/favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'styles/style.css' %}">
   </head>
   <body>
     <style>
+      body { padding: 0; margin: 0 }
+#unity-container { z-index: 9999; position: absolute }
+#unity-container.unity-desktop { left: 50%; top: 40%; transform: translate(-50%, -50%) }
+#unity-container.unity-mobile { width: 100%; height: 100% }
+#unity-canvas { background: #231F20 }
+.unity-mobile #unity-canvas { width: 100%; height: 100% }
+#unity-loading-bar { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: none }
+
+
+#unity-footer { position: relative; }
+.unity-mobile #unity-footer { display: none }
+
+#unity-build-title { float: right; margin-right: 10px; line-height: 38px; font-family: arial; font-size: 18px }
+
+#unity-warning { position: absolute; left: 50%; top: 5%; transform: translate(-50%); background: white; padding: 10px; display: none }
       #unity-logo { 
         width: 154px; 
         height: 130px;
@@ -39,7 +54,86 @@
         height: 38px; 
         background: url("{% static 'media/fullscreen-button.png' %}") no-repeat center;
       }
+      .main-container{
+        max-width: 100%;
+        margin: 0 auto;
+      }
+      .content-container{
+        width: 50%;
+        height: 100vh;
+        margin: 0 auto;
+        position: relative;
+      }
+      .content-lower-division{
+        position: absolute;
+        top: 63%;
+        width: 100%;
+        height: 50vh;
+      }
+      .content{
+        margin-top: 50px;
+      }
+      .comment-box{
+        width: 100%;
+       
+      
+        color: black;
+      }
+      #comment{
+        width: 80%;
+        height: 30px;
+        border: none;
+        border-radius: 10px;
+        outline: none;
+      }
+      .comment-buttons{
+        width: 80px;
+        border: none;
+        border-radius: 10px;
+        background-color: white;
+        color: black;
+        height: 30px;
+        float: right;
+        padding: 5px;
+        font-weight: bold;
+        margin-left:10px;
+       
+      }
+      #reject-button:hover{
+        background-color: red;
+        color: white;
+      }
+      #accept-button:hover{
+        background-color: black;
+        color: white;
+      }
+      .comments{
+        margin-top: 10px;
+        font-size: 14px;
+        padding: 10px;
+    /* display: inline-block; */
+    position: relative;
+    width: 98%;
+    /* height: auto; */
+    border-radius: 10px;
+    border: none;
+    background-color: #005898;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+        
+      }
+      .comments p{
+        display: contents;
+    position: absolute;
+    top: -10%;
+    left: 2%;
+      }
+#status{
+  font-size: 18px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
     </style>
+    <div class="main-container">
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600></canvas>
       <div id="unity-loading-bar">
@@ -50,11 +144,43 @@
       </div>
       <div id="unity-warning"> </div>
       <div id="unity-footer">
-        <div style="display:none" id="unity-webgl-logo"></div>
+        {% if model.case_status == "P" %}
+        <div id="status" style="color: orange;">Status: {{model.get_case_status_display|safe}}</div>
+        {% elif model.case_status == 'A' %}
+        <div id="status" style="color: #5ab95a;">Status: {{model.get_case_status_display|safe}}</div>
+        {% elif model.case_status == 'R' %}
+        <div id="status" style="color: white;">Status: {{model.get_case_status_display|safe}}</div>
+        {% endif %}
+        
         <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">Zaid v1.0</div>
+        <div id="unity-build-title">v1.0</div>
       </div>
     </div>
+    {% include 'add-index.html' %}
+    <div class="content-container">
+      <div class="content-lower-division">
+        <div class="content">
+          <div class="comment-box">
+            <form id="comment-form" action="" method="post">
+              {% csrf_token %}
+            <input  id="comment" name="comment" placeholder="Comment...">
+        
+            <button type="submit" id="reject-button" name = "reject-case" class="comment-buttons">Reject</button>
+            <button type="submit" id="accept-button" name="accept-case" class="comment-buttons">Accept</button>
+          </form>
+          </div>
+          <br><hr><br>
+          {% for comment in comments %}
+          <div class="comments">
+            <p>{{comment.content}}</p>
+            <br>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+    
     <script>
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
@@ -88,11 +214,11 @@
       }
 
     var buildUrl = "Build";
-      var loaderUrl = "{% static 'JS/build_44.loader.js' %}";
+      var loaderUrl = "{% static 'JS/build_46.loader.js' %}";
       var config = {
-        dataUrl: "{% static 'JS/build_44.data.unityweb' %}",
-        frameworkUrl: "{% static 'JS/build_44.framework.js.unityweb' %}",
-        codeUrl: "{% static 'JS/build_44.wasm.unityweb' %}",
+        dataUrl: "{% static 'JS/build_46.data.unityweb' %}",
+        frameworkUrl: "{% static 'JS/build_46.framework.js.unityweb' %}",
+        codeUrl: "{% static 'JS/build_46.wasm.unityweb' %}",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "Teetho",
