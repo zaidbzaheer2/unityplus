@@ -22,6 +22,9 @@ class GLBModels(models.Model):
     # id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=True)
     # def __str__(self):
     #     return self.name
+    upper_stages_number = models.PositiveIntegerField(default=0, null=True, blank=False)
+    lower_stages_number = models.PositiveIntegerField(default=0, null=True, blank=False)
+    
 class Comment(models.Model):
     case = models.ForeignKey(GLBModels, on_delete=models.CASCADE, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
