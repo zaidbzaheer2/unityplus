@@ -7,11 +7,39 @@
     <title>Case Viewer</title>
     <link rel="shortcut icon" href="{% static 'media/favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
   </head>
   <body>
     <style>
-      body { padding: 0; margin: 0 }
-#unity-container { z-index: 9999; position: absolute }
+      .toggle-ipr-btn{
+        font-size: 16px;
+    background: black;
+    color: white;
+    padding: 10px;
+    margin-right: 110px;
+      }
+      .ipr-area{
+        display: none;
+        width: 100%;
+    max-width: 1000px;
+    height: 65vh;
+        position: relative;
+    background-color: white;
+    border: 2px solid black;
+    
+    z-index: 10000;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+.ipr-area img{
+  width: 100%;
+  height: 100%;
+}
+body { padding: 0; margin: 0 }
+#unity-container { z-index: 9999; position: absolute;float: left;
+    margin: 60px 0; }
 #unity-container.unity-desktop { left: 50%; top: 40%; transform: translate(-50%, -50%) }
 #unity-container.unity-mobile { width: 100%; height: 100% }
 #unity-canvas { background: #231F20 }
@@ -19,10 +47,20 @@
 #unity-loading-bar { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: none }
 
 
-#unity-footer { position: relative; }
+#unity-footer { position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start; }
 .unity-mobile #unity-footer { display: none }
 
-#unity-build-title { float: right; margin-right: 10px; line-height: 38px; font-family: arial; font-size: 18px }
+#unity-build-title { float: right;
+    width: 100px;
+    margin-right: 45px;
+    line-height: 38px;
+    font-family: arial;
+    font-size: 18px;}
 
 #unity-warning { position: absolute; left: 50%; top: 5%; transform: translate(-50%); background: white; padding: 10px; display: none }
       #unity-logo { 
@@ -66,19 +104,47 @@
       }
       .content-lower-division{
         position: absolute;
-        top: 63%;
+    top: 80%;
+    width: 100%;
+    height: 30vh;
+      }
+      hr{
         width: 100%;
-        height: 50vh;
+    max-width: 910px;
+
+    margin: 0 auto;
+    margin-top: 30px;
       }
       .content{
-        margin-top: 50px;
+        margin-top: 40px;
+        height: 85%;
       }
       .comment-box{
         width: 100%;
-       
-      
-        color: black;
+    max-width: 910px;
+    color: black;
+    margin: 0 auto;
       }
+      .old-comments{
+        width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    height: 39%;
+    overflow: scroll;
+    overflow-x: hidden;
+    padding-right: 20px;
+      }
+      .old-comments::-webkit-scrollbar{
+        background: cadetblue;
+      
+      }
+    
+         .old-comments::-webkit-scrollbar-thumb {
+          background: #005898;
+   
+  
+          border-radius: 20px;
+}
       #comment{
         width: 80%;
         height: 30px;
@@ -108,18 +174,17 @@
         color: white;
       }
       .comments{
-        margin-top: 10px;
         font-size: 14px;
-        padding: 10px;
-    /* display: inline-block; */
-    position: relative;
-    width: 98%;
-    /* height: auto; */
-    border-radius: 10px;
-    border: none;
-    background-color: #005898;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: white;
+        padding: 10px; 
+        border-radius: 10px;
+        border: none;
+        background-color: #005898;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        color: white;
+        width: 100%;
+        max-width: 910px;
+        margin: 0 auto;
+        margin-top: 15px;
         
       }
       .comments p{
@@ -132,8 +197,11 @@
   font-size: 18px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
     </style>
+
     <div class="main-container">
+      {% include 'add-index.html' %}
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600></canvas>
       <div id="unity-loading-bar">
@@ -151,34 +219,66 @@
         {% elif model.case_status == 'R' %}
         <div id="status" style="color: white;">Status: {{model.get_case_status_display|safe}}</div>
         {% endif %}
+        <button class="toggle-ipr-btn" id="show-btn" onclick="toggle_ipr()">Show IPR</button>
+        <div id="unity-fullscreen-button"><div id="unity-build-title">v1.0 by zbz</div></div>
         
-        <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">v1.0</div>
       </div>
     </div>
-    {% include 'add-index.html' %}
-    <div class="content-container">
-      <div class="content-lower-division">
-        <div class="content">
-          <div class="comment-box">
-            <form id="comment-form" action="" method="post">
-              {% csrf_token %}
-            <input  id="comment" name="comment" placeholder="Comment...">
-        
-            <button type="submit" id="reject-button" name = "reject-case" class="comment-buttons">Reject</button>
-            <button type="submit" id="accept-button" name="accept-case" class="comment-buttons">Accept</button>
-          </form>
-          </div>
-          <br><hr><br>
-          {% for comment in comments %}
-          <div class="comments">
-            <p>{{comment.content}}</p>
-            <br>
-          </div>
-          {% endfor %}
+    <div class="ipr-area" id="ipr_handle">
+      <!-- <button class="toggle-ipr-btn" id="hide-btn">Hide IPR</button> -->
+      {% if model.ipr_form %}
+      <img src="{{model.ipr_form.url}}">
+      {% else %}
+      IPR FORM hasn't been uploaded.
+      {% endif %}
+    </div>
+    <script>
+      let iprArea = document.getElementById("ipr_handle");
+      const iprToggle = document.getElementById("show-btn");
+
+      function toggle_ipr(){
+        console.log("Clicked!")
+        if(window.getComputedStyle(document.getElementsByClassName("ipr-area")[0]).display == "none"){
+          iprArea.style.display = "block";
+          iprToggle.innerText = "Hide IPR";
+        }else{
+          iprArea.style.display = "none";
+          iprToggle.innerText = "Show IPR";
+          
+        }
+      }
+    </script>
+    <div class="content-lower-division">
+      <div class="content">
+        <div class="comment-box">
+          <form id="comment-form" action="" method="post">
+            {% csrf_token %}
+          <input  id="comment" name="comment" placeholder="Comment...">
+      
+          <button type="submit" id="reject-button" name = "reject-case" class="comment-buttons">Reject</button>
+          <button type="submit" id="accept-button" name="accept-case" class="comment-buttons">Accept</button>
+        </form>
         </div>
+        <br><hr><br>
+        <div class="old-comments">
+        {% for comment in comments %}
+        {% if comment.content != "" %}
+     
+        <div class="comments">
+          <p>{{comment.content}}</p>
+          <br>
+        </div>
+        {% else %}
+        <div class="comments" style="background-color: cadetblue;">
+          <p>Be the first to comment.</p>
+          <br>
+        </div>
+        {% endif %}
+        {% endfor %}
+        <div>
       </div>
     </div>
+ 
   </div>
     
     <script>
@@ -214,11 +314,11 @@
       }
 
     var buildUrl = "Build";
-      var loaderUrl = "{% static 'JS/build_48.loader.js' %}";
+      var loaderUrl = "{% static 'JS/build_52.loader.js' %}";
       var config = {
-        dataUrl: "{% static 'JS/build_48.data.unityweb' %}",
-        frameworkUrl: "{% static 'JS/build_48.framework.js.unityweb' %}",
-        codeUrl: "{% static 'JS/build_48.wasm.unityweb' %}",
+        dataUrl: "{% static 'JS/build_52.data.unityweb' %}",
+        frameworkUrl: "{% static 'JS/build_52.framework.js.unityweb' %}",
+        codeUrl: "{% static 'JS/build_52.wasm.unityweb' %}",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "Teetho",
@@ -261,5 +361,8 @@
       };
       document.body.appendChild(script);
     </script>
+    <footer style="position:fixed; bottom:0px;padding-bottom:20px;padding-top: 10px;width: 100%;text-align: center; background-color: rgba(0, 0, 0, 0.7);; height: 30px; color: white;font-family:'Dancing Script', cursive;font-size: 30px;">
+     Made by zaid
+    </footer>
   </body>
 </html>

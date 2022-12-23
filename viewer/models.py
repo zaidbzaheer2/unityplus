@@ -15,6 +15,7 @@ class GLBModels(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=True)
     upper_model = models.FileField(null=True, blank=True)
     lower_model = models.FileField(null=True, blank=True)
+    ipr_form = models.ImageField(null=True, blank=True)
     #ipr_form = models.FileField(null=True, blank=True)
 
     # name = models.CharField(blank=True, null=True, max_length=100)

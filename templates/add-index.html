@@ -1,7 +1,8 @@
 {% load static %}
 <style>
     .main-header{
-        background-image: url("{% static 'media/headerbg.jpg'%}");
+        /* background-image: url("{% static 'media/headerbg.jpg'%}"); */
+        background-color: rgba(0, 0, 0, 0.7);
         width: 100%;
         height: 60px;
         display: flex;
@@ -12,11 +13,14 @@
     body {
     background-repeat: no-repeat;
     height: 100vh;
-    background-image: url("{% static 'media/blue-bg.jpg'%}");
+    background: cadetblue;
     background-size: 100%;
     }
 </style>
 <div class="main-header">
     <h3 style="margin-left: 20px;">OzzySmile</h3>
-    <h3 style="margin-right: 20px;">{{request.user.username}}</h3>
+    <h3 style="margin-right: 20px;">
+        <!-- {{request.user.username}} -->
+        User
+    </h3>
 </div>

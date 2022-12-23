@@ -13,6 +13,10 @@
     header{
         background-image: url("{% static 'media/headerbg.jpg'%}");
     }
+    footer{
+        position: absolute;
+        bottom: 0;
+    }
 </style>
 <body>
     <header>
@@ -30,5 +34,8 @@
     {% block body %}
     {% endblock %}
     </div>
+    <footer>
+        <h6>Made by zaid</h6>
+    </footer>
 </body>
 </html>
