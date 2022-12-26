@@ -3,6 +3,7 @@
 <html lang="en-us">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Case Viewer</title>
     <link rel="shortcut icon" href="{% static 'media/favicon.ico' %}">
@@ -10,198 +11,64 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+<script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+  
+    <!-- jQuery code to show the working of this method -->
+    <script>
+      window.addEventListener("load",function() {
+    setTimeout(function(){
+        // Hide the address bar:
+        window.scrollTo(0, 1);
+    }, 0);
+});
+     $(document).ready(function() {
+            $("#move-down-btn").click(function() {
+                $("html, body").animate({
+                    scrollTop: $(
+                      'html, body').get(0).scrollHeight
+                }, 2000);
+            });
+            $("#move-up-btn").click(function(){
+              $("html, body").animate({
+                    scrollTop:"0"
+            });
+          });
+        });
+    </script>
   </head>
   <body>
-    <style>
-      .toggle-ipr-btn{
-        font-size: 16px;
-    background: black;
-    color: white;
-    padding: 10px;
-    margin-right: 110px;
-      }
-      .ipr-area{
-        display: none;
-        width: 100%;
-    max-width: 1000px;
-    height: 65vh;
-        position: relative;
-    background-color: white;
-    border: 2px solid black;
-    
-    z-index: 10000;
-    margin: 0 auto;
-    margin-top: 40px;
-}
-.ipr-area img{
-  width: 100%;
-  height: 100%;
-}
-body { padding: 0; margin: 0 }
-#unity-container { z-index: 9999; position: absolute;float: left;
-    margin: 60px 0; }
-#unity-container.unity-desktop { left: 50%; top: 40%; transform: translate(-50%, -50%) }
-#unity-container.unity-mobile { width: 100%; height: 100% }
-#unity-canvas { background: #231F20 }
-.unity-mobile #unity-canvas { width: 100%; height: 100% }
-#unity-loading-bar { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: none }
-
-
-#unity-footer { position: relative;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: flex-start; }
-.unity-mobile #unity-footer { display: none }
-
-#unity-build-title { float: right;
-    width: 100px;
-    margin-right: 45px;
-    line-height: 38px;
-    font-family: arial;
-    font-size: 18px;}
-
-#unity-warning { position: absolute; left: 50%; top: 5%; transform: translate(-50%); background: white; padding: 10px; display: none }
-      #unity-logo { 
-        width: 154px; 
-        height: 130px;
-        background: url("{% static 'media/unity-logo-dark.png' %}") no-repeat center; 
-      }
-      #unity-progress-bar-empty {
-        width: 141px;
-        height: 18px;
-        margin-top: 10px;
-        background: url("{% static 'media/progress-bar-empty-dark.png' %}") no-repeat center; 
-      }
-      #unity-progress-bar-full { 
-        width: 0%; 
-        height: 18px; 
-        margin-top: 10px; 
-        background: url("{% static 'media/progress-bar-full-dark.png'  %}") no-repeat center; 
-      }
-      #unity-webgl-logo { 
-        float:left; 
-        width: 204px; 
-        height: 38px; 
-        background: url("{% static 'media/webgl-logo.png' %}") no-repeat center; 
-      }
-      #unity-fullscreen-button { 
-        float: right; 
-        width: 38px; 
-        height: 38px; 
-        background: url("{% static 'media/fullscreen-button.png' %}") no-repeat center;
-      }
-      .main-container{
-        max-width: 100%;
-        margin: 0 auto;
-      }
-      .content-container{
-        width: 50%;
-        height: 100vh;
-        margin: 0 auto;
-        position: relative;
-      }
-      .content-lower-division{
-        position: absolute;
-    top: 80%;
-    width: 100%;
-    height: 30vh;
-      }
-      hr{
-        width: 100%;
-    max-width: 910px;
-
-    margin: 0 auto;
-    margin-top: 30px;
-      }
-      .content{
-        margin-top: 40px;
-        height: 85%;
-      }
-      .comment-box{
-        width: 100%;
-    max-width: 910px;
-    color: black;
-    margin: 0 auto;
-      }
-      .old-comments{
-        width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-    height: 39%;
-    overflow: scroll;
-    overflow-x: hidden;
-    padding-right: 20px;
-      }
-      .old-comments::-webkit-scrollbar{
-        background: cadetblue;
-      
-      }
-    
-         .old-comments::-webkit-scrollbar-thumb {
-          background: #005898;
-   
-  
-          border-radius: 20px;
-}
-      #comment{
-        width: 80%;
-        height: 30px;
-        border: none;
-        border-radius: 10px;
-        outline: none;
-      }
-      .comment-buttons{
-        width: 80px;
-        border: none;
-        border-radius: 10px;
-        background-color: white;
-        color: black;
-        height: 30px;
-        float: right;
-        padding: 5px;
-        font-weight: bold;
-        margin-left:10px;
-       
-      }
-      #reject-button:hover{
-        background-color: red;
-        color: white;
-      }
-      #accept-button:hover{
-        background-color: black;
-        color: white;
-      }
-      .comments{
-        font-size: 14px;
-        padding: 10px; 
-        border-radius: 10px;
-        border: none;
-        background-color: #005898;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-        color: white;
-        width: 100%;
-        max-width: 910px;
-        margin: 0 auto;
-        margin-top: 15px;
-        
-      }
-      .comments p{
-        display: contents;
-    position: absolute;
-    top: -10%;
-    left: 2%;
-      }
-#status{
-  font-size: 18px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-    </style>
-
+  <style>
+    /* Only for static elements */
+    #unity-logo{
+      background: url("{% static 'media/unity-logo-dark.png' %}") no-repeat center; 
+    }
+    #unity-fullscreen-button{
+      background: url("{% static 'media/fullscreen-button.png' %}") no-repeat center;
+    }
+    #unity-progress-bar-empty {
+    background: url("{% static 'media/progress-bar-empty-dark.png' %}") no-repeat center; 
+  }
+  #unity-progress-bar-full { 
+    background: url("{% static 'media/progress-bar-full-dark.png'  %}") no-repeat center; 
+  }
+  #unity-webgl-logo { 
+    background: url("{% static 'media/webgl-logo.png' %}") no-repeat center; 
+  }
+    footer{
+      display: block;
+    }
+  </style>
     <div class="main-container">
       {% include 'add-index.html' %}
+      <button id="move-down-btn" class="scroll-buttons">
+        <img src="{% static 'media/down.png' %}" width="25px" height="25px">
+      </button>
+      <button id="move-up-btn" class="scroll-buttons">
+        <img src="{% static 'media/down.png' %}" width="25px" height="25px">
+      </button>
+     
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600></canvas>
       <div id="unity-loading-bar">
@@ -280,7 +147,11 @@ body { padding: 0; margin: 0 }
     </div>
  
   </div>
-    
+  <div>
+  <footer id="main-footer">
+    Made by zaid
+   </footer>
+  </div>
     <script>
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
@@ -314,11 +185,11 @@ body { padding: 0; margin: 0 }
       }
 
     var buildUrl = "Build";
-      var loaderUrl = "{% static 'JS/build_52.loader.js' %}";
+      var loaderUrl = "{% static 'JS/build_56.loader.js' %}";
       var config = {
-        dataUrl: "{% static 'JS/build_52.data.unityweb' %}",
-        frameworkUrl: "{% static 'JS/build_52.framework.js.unityweb' %}",
-        codeUrl: "{% static 'JS/build_52.wasm.unityweb' %}",
+        dataUrl: "{% static 'JS/build_56.data.unityweb' %}",
+        frameworkUrl: "{% static 'JS/build_56.framework.js.unityweb' %}",
+        codeUrl: "{% static 'JS/build_56.wasm.unityweb' %}",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "Teetho",
@@ -338,7 +209,7 @@ body { padding: 0; margin: 0 }
         // Avoid draining fillrate performance on mobile devices,
         // and default/override low DPI mode on mobile browsers.
         config.devicePixelRatio = 1;
-        unityShowBanner('WebGL builds are not supported on mobile devices.');
+        unityShowBanner('Might take some time to load.');
       } else {
         canvas.style.width = "960px";
         canvas.style.height = "600px";
@@ -361,8 +232,8 @@ body { padding: 0; margin: 0 }
       };
       document.body.appendChild(script);
     </script>
-    <footer style="position:fixed; bottom:0px;padding-bottom:20px;padding-top: 10px;width: 100%;text-align: center; background-color: rgba(0, 0, 0, 0.7);; height: 30px; color: white;font-family:'Dancing Script', cursive;font-size: 30px;">
-     Made by zaid
-    </footer>
+    <script>
+      screen.orientation.lock('landscape');
+    </script>
   </body>
 </html>

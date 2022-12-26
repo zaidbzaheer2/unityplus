@@ -9,6 +9,7 @@
         justify-content: space-between;
         color: white;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
+        
     }
     body {
     background-repeat: no-repeat;
@@ -16,11 +17,23 @@
     background: cadetblue;
     background-size: 100%;
     }
+    @media only screen and (max-width: 768px) {
+  .main-header {
+    display: none;
+  }
+}
 </style>
 <div class="main-header">
-    <h3 style="margin-left: 20px;">OzzySmile</h3>
+    <h3 style="margin-left: 20px;">UnityPlus</h3>
+    <div>
     <h3 style="margin-right: 20px;">
-        <!-- {{request.user.username}} -->
-        User
+        {{request.user.username}}
     </h3>
+   <a href="{% url 'LogoutPage' %}"><button>
+    Logout
+  </button></a>
+   
+    
+    </div>
+    
 </div>

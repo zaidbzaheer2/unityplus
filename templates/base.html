@@ -14,16 +14,18 @@
         background-image: url("{% static 'media/headerbg.jpg'%}");
     }
     footer{
+        display: none;
         position: absolute;
         bottom: 0;
     }
 </style>
 <body>
     <header>
-        <div id="logo1">OzzySmile</div>
+        <div id="logo1">UnityPlus</div>
         <div class="myButtons auth-buttons">
             {% if request.user.is_authenticated %}
             <button>{{request.user.username}}</button>
+            <a href="{% url 'LogoutPage'%}"><button>Logout</button></a>
             {% else %}
             <a href="{% url 'LoginPage' %}"><button>Login</button></a>
             <a href="{% url 'RegisterPage' %}"><button>Sign Up</button></a>

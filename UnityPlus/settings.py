@@ -28,6 +28,7 @@ SECRET_KEY = 'django-insecure-uy&qn5e#qt7e=lt_!7)lf+x!2rlsde@w8&+9d3^d#bpjmp2u1f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://web-production-9970.up.railway.app','https://*.127.0.0.1']
 DATA_UPLOAD_MAX_MEMORY_SIZE = 50242880
 
 # Application definition
@@ -136,7 +137,13 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
-
+#SMTP Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = '64.233.184.108'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'zaidbzaheer@gmail.com'
+EMAIL_HOST_PASSWORD = 'ezrljuexrdeigzfx'
  # Debugging in heroku live
 LOGGING = {
     'version': 1,

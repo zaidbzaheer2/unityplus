@@ -8,7 +8,7 @@ class GLBModels(models.Model):
     status_list = (
         ("P", "Pending"),("A", "Accepted"),("R", "Rejected"),)
        
-    case_alias = models.CharField(null=True, blank=True, max_length=50);
+    case_alias = models.CharField(null=True, blank=True, max_length=50)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     case_status = models.CharField(max_length=100, choices=status_list,
         default="P")

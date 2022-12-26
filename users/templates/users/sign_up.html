@@ -6,62 +6,75 @@
 {% block page_title %}Sign Up{% endblock %}
 {% block body %}
 <style>
-.content-holder{
-    width: 50%;
-    height: 500px;
+    .content-holder{
+    max-width: 400px;
     margin: 0 auto;
     margin-top: 60px;
-}
-.sign_up-form{
+    height: 390px;
+    }
+.sign-up-form{
+    width: 100%;
+    height: 100%;
+    border: 2px solid black;
+    border-radius: 30px;
     display: flex;
-    background-color: rgb(188, 188, 214);
-    width: 60%;
-    margin: 0 auto;
-    height: 90%;
     flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
     align-items: center;
-    justify-content: space-evenly;
-    align-content: stretch;
-    flex-wrap: wrap;
+    text-align: center;
 }
-.sign_up-form div{
-    width: 65%;
-    background-color: white;
-    border-radius: 20px;
+.sign-up-form-fields{
+ 
 }
-.sign_up-form div label{
-    float: left;
-    font-size: 16px;
-    margin-top: 3px;
-    margin-left: 5px;
-}
-.sign_up-form div input{
-    float: right;
-    height: 30px;
-    width: 200px;
-    border: none;
-    border-left: 1px solid black ;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    outline: none;
+input{
     
+    width: 250px;
+    height: 25px;
+    border-radius: 20px;
+    outline: none;
+    border: 1px solid black;
 }
+.sign-up-form h3{
+    width: 100%;
+    text-align: center;
+    background-color: cadetblue;
+    color: white;
+    height: 30px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+
+}
+#create-account-btn{
+    width: 100px;
+    cursor: pointer;
+    height: 35px;
+    border: 2px solid cadetblue;
+    background-color: cadetblue;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+}
+
 </style>
-<div class="content-holder">
-    <form method="post" class="sign_up-form">
+<div class="content-holder" style="width: 90%;">
+    <form method="post" class="sign-up-form">
         {% csrf_token %}
+        <h3>SignUp for UnityPlus</h3>
         <div>
-        <label for="username">Email</label>
+        <label for="username">Email</label><br>
         {{form.username}}
     </div><div>
-        <label for="password1">Create Password</label>
+        <label for="password1">Password</label><br>
         {{form.password1}}
     </div><div>
         <label for="password2">Confirm Password</label>
         {{form.password2}}
     </div>
-        <button style="margin:0 20%;" type="submit">Save</button>
+        <button id="create-account-btn" style="margin:0 20%;" type="submit">Create Account</button>
     </form>
-   
+   {% include 'error-list.html' %}
 </div>
-{% endblock %}a
+{% endblock %}

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block css_links %}
+<link rel="stylesheet" href="{% static 'styles/login.css' %}" class="css">
 {% endblock %}
 {% block page_title %}Sign Up{% endblock %}
 {% block body %}
@@ -12,12 +13,14 @@
     margin-top: 60px;
 }
 </style>
-<div class="content-holder">
+<div class="content-holder" style="width: 90%;">
 <form method="post" class="loginForm">
     {% csrf_token %}
-    <input type="text" value="username" name="username" required>
-    <input type="password" value="password" name="password" required>
-    <button type="submit">Login</button>
+    <h3>Login to UnityPlus</h3>
+    <input class="login-form-field" type="text" value="username" name="username" placeholder="Email..." required>
+    <input  class="login-form-field" type="password" value="password" name="password" placeholder="*******" required>
+    <button id="login-submit-btn" type="submit">Login</button>
     </form>
+    {% include 'error-list.html' %}
 </div>
 {% endblock %}

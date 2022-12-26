@@ -61,12 +61,36 @@
         background-color: white !important;
         color: black;
     }
+    .thumbnail{
+        width: 50px;
+        height: 50px;
+    }
+    @media only screen and (max-width:768px){
+        .content-holder{
+            height: 630px;
+            flex-wrap: nowrap;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            align-content: center;
+        }
+        .thumb-holder{
+            height: 60%;
+        }
+        .thumb-holder img{
+            left: 30%;
+        }
+        .cards{
+            margin-bottom: 20px;
+            width: 140px;
+        }
+    }
     </style>
     
     <div class="content-holder">
         <div class="cards">
             <div class="thumb-holder">
-            <img class="thumbnail" src="{% static 'media/unitylogo.png' %}" width="50px" height="50px">
+            <img class="thumbnail" src="{% static 'media/unitylogo.png' %}" >
             </div>
 
             <hr>
@@ -74,7 +98,7 @@
         </div>
         <div class="cards">
             <div class="thumb-holder">
-                <img class="thumbnail" src="{% static 'media/search.png' %}" width="50px" height="50px">
+                <img class="thumbnail" src="{% static 'media/search.png' %}" >
             </div>
 
             <hr>
@@ -82,7 +106,7 @@
         </div>
         <div class="cards -fixed">
             <div class="thumb-holder">
-                <img class="thumbnail" src="{% static 'media/uploadC.png' %}" width="50px" height="50px">
+                <img class="thumbnail" src="{% static 'media/uploadC.png' %}" >
             </div>
 
             <hr>
@@ -90,7 +114,7 @@
         </div>
         <div class="cards -fixed"><a href="{% url 'ShowPage' %}">
             <div class="thumb-holder">
-                <img class="thumbnail" src="{% static 'media/viewerA.png' %}" width="50px" height="50px">
+                <img class="thumbnail" src="{% static 'media/viewerA.png' %}" >
             </div>
 
             <hr>

@@ -1,0 +1,22 @@
+<style>
+    .message-list{
+    width: 100%;
+}
+.message-list li{
+    width: 90%;
+    height: 25px;
+    margin: 0 auto;
+    margin-top: 10px;
+    color: red;
+    font-size: 14px;
+    border-radius: 10px;
+    padding: 5px;
+}
+</style>
+{% if messages %}
+   <ul class="message-list">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{message.tags}}" {% endif %}>{{message}}</li>
+    {% endfor %}
+   </ul>
+{% endif %}
