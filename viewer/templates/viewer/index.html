@@ -35,6 +35,14 @@
                     scrollTop:"0"
             });
           });
+          $("#review-btn").click(function(){
+            $(".overlay").css("display", "block");
+            $(".content-lower-division").css("display", "block");
+          });
+          $("#cancel-comment-btn").click(function(){
+            $(".overlay").css("display", "none");
+            $(".content-lower-division").css("display", "none");
+          });
         });
     </script>
   </head>
@@ -61,6 +69,9 @@
     }
   </style>
     <div class="main-container">
+      <div class="overlay">
+
+      </div>
       {% include 'add-index.html' %}
       <button id="move-down-btn" class="scroll-buttons">
         <img src="{% static 'media/down.png' %}" width="25px" height="25px">
@@ -86,18 +97,10 @@
         {% elif model.case_status == 'R' %}
         <div id="status" style="color: white;">Status: {{model.get_case_status_display|safe}}</div>
         {% endif %}
-        <button class="toggle-ipr-btn" id="show-btn" onclick="toggle_ipr()">Show IPR</button>
-        <div id="unity-fullscreen-button"><div id="unity-build-title">v1.0 by zbz</div></div>
+        
+        <div id="unity-fullscreen-button"><div id="unity-build-title">v5.9 by zbz</div></div>
         
       </div>
-    </div>
-    <div class="ipr-area" id="ipr_handle">
-      <!-- <button class="toggle-ipr-btn" id="hide-btn">Hide IPR</button> -->
-      {% if model.ipr_form %}
-      <img src="{{model.ipr_form.url}}">
-      {% else %}
-      IPR FORM hasn't been uploaded.
-      {% endif %}
     </div>
     <script>
       let iprArea = document.getElementById("ipr_handle");
@@ -115,7 +118,10 @@
         }
       }
     </script>
+    <hr style="color: white;width:100%; margin: 10px auto;">
+    <button id="review-btn"><img src="{% static 'media/pencil_icon.png' %}" width="25px" height="25px" style="float :left"><p  style="float: right; margin-top: 6px;font-size: 16px;">Review Case</p></button>
     <div class="content-lower-division">
+    
       <div class="content">
         <div class="comment-box">
           <form id="comment-form" action="" method="post">
@@ -128,29 +134,34 @@
         </div>
         <br><hr><br>
         <div class="old-comments">
-        {% for comment in comments %}
-        {% if comment.content != "" %}
-     
-        <div class="comments">
-          <p>{{comment.content}}</p>
-          <br>
-        </div>
-        {% else %}
-        <div class="comments" style="background-color: cadetblue;">
-          <p>Be the first to comment.</p>
-          <br>
-        </div>
-        {% endif %}
-        {% endfor %}
+          {% if comments %}
+          {% for comment in comments %}
+          <div class="comments">
+            <p class="comment-content">{{comment.content}}</p>
+            <p class="comment-by">{{comment.user.username}}</p>
+            <p class="comment-date">{{comment.date_created}}</p>
+            <br>
+          </div>
+          <hr style="margin-top: 0;">
+          {% endfor %}
+          {% else %}
+          <div class="comments" >
+            <p>Be the first to comment.</p>
+            <br>
+          </div>
+          
+          {% endif %}
         <div>
       </div>
     </div>
+    <button id="cancel-comment-btn">Cancel</button>
  
   </div>
   <div>
-  <footer id="main-footer">
+
+  </div>
+  <div id="main-footer">
     Made by zaid
-   </footer>
   </div>
     <script>
       var container = document.querySelector("#unity-container");
@@ -185,11 +196,11 @@
       }
 
     var buildUrl = "Build";
-      var loaderUrl = "{% static 'JS/build_56.loader.js' %}";
+      var loaderUrl = "{% static 'JS/build_59C.loader.js' %}";
       var config = {
-        dataUrl: "{% static 'JS/build_56.data.unityweb' %}",
-        frameworkUrl: "{% static 'JS/build_56.framework.js.unityweb' %}",
-        codeUrl: "{% static 'JS/build_56.wasm.unityweb' %}",
+        dataUrl: "{% static 'JS/build_59C.data.unityweb' %}",
+        frameworkUrl: "{% static 'JS/build_59C.framework.js.unityweb' %}",
+        codeUrl: "{% static 'JS/build_59C.wasm.unityweb' %}",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "Teetho",

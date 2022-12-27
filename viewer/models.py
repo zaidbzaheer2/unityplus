@@ -1,8 +1,8 @@
-from operator import mod
-from xml.etree.ElementTree import tostring
+from datetime import date
 from django.db import models
 import uuid
 from django.contrib.auth.models import User
+from django.utils import timezone
 # Create your models here.
 class GLBModels(models.Model):
     status_list = (
@@ -15,7 +15,7 @@ class GLBModels(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=True)
     upper_model = models.FileField(null=True, blank=True)
     lower_model = models.FileField(null=True, blank=True)
-    ipr_form = models.ImageField(null=True, blank=True)
+    ipr_form = models.ImageField(null=True, blank=True, default='ipr_gen.png')
     #ipr_form = models.FileField(null=True, blank=True)
 
     # name = models.CharField(blank=True, null=True, max_length=100)
@@ -31,3 +31,4 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False, unique=True)
     content = models.TextField(max_length=150,blank=True, null=True)
+    date_created = models.DateTimeField(default=timezone.now, null=True, blank=True)
